@@ -67,6 +67,8 @@ extension ViewTransition {
                 return nil
             case .dismiss:
                 return nil
+            case .dismissAll:
+                return nil
             case .dismissView:
                 return nil
             case .push:
@@ -106,6 +108,8 @@ extension ViewTransition: CustomStringConvertible {
                 return "Replace"
             case .dismiss:
                 return "Dismiss"
+            case .dismissAll:
+                return "Dismiss all"
             case .dismissView(let name):
                 return "Dismiss \(name)"
             case .push:
@@ -160,6 +164,11 @@ extension ViewTransition {
     @inlinable
     public static var dismiss: ViewTransition {
         .init(payload: .dismiss)
+    }
+
+    @inlinable
+    public static var dismissAll: ViewTransition {
+        .init(payload: .dismissAll)
     }
     
     @inlinable

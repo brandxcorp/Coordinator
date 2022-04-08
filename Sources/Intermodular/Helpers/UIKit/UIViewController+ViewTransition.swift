@@ -50,7 +50,17 @@ extension UIViewController {
                     }
                 }
             }
-            
+
+            case .dismissAll: do {
+                guard presentedViewController != nil else {
+                    throw ViewTransition.Error.nothingToDismiss
+                }
+
+                dismiss(animated: animated) {
+                    completion()
+                }
+            }
+
             case .dismissView(let name): do {
                 _ = dismissView(named: name)
                     .onOutput(do: completion())
