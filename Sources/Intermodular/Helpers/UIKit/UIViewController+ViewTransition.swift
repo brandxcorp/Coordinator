@@ -40,8 +40,14 @@ extension UIViewController {
                     throw ViewTransition.Error.nothingToDismiss
                 }
                 
-                dismiss(animated: animated) {
-                    completion()
+                if let viewController = topmostPresentedViewController?.presentingViewController {
+                    viewController.dismiss(animated: animated) {
+                        completion()
+                    }
+                } else {
+                    dismiss(animated: animated) {
+                        completion()
+                    }
                 }
             }
             
