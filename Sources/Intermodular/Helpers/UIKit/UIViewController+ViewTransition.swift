@@ -16,7 +16,7 @@ extension UIViewController {
     ) throws {
         switch transition.finalize() {
             case .present(let view): do {
-                presentOnTop(view, named: transition.payloadViewName, animated: animated) {
+                presentOnTop(view, named: transition.payloadViewName, animated: animated, presentationStyle: view.modalPresentationStyle) {
                     completion()
                 }
             }
@@ -219,9 +219,10 @@ extension UIViewController {
         _ view: AnyPresentationView,
         named viewName: AnyHashable?,
         animated: Bool,
+        presentationStyle: ModalPresentationStyle? = nil,
         completion: @escaping () -> Void
     ) {
-        topmostViewController.present(view)
+        topmostViewController.present(view, named: viewName, presentationStyle: presentationStyle, completion: completion)
     }
 }
 
